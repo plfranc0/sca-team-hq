@@ -1,16 +1,15 @@
-/* SCA Team HQ — Firebase project config.
-   Patrick pastes the web-app config from Firebase console → Project settings → Your apps here.
-   Until this is filled in, the page runs in static mode (links, playbooks, team, stats all work;
-   sign-in, tasks, notes, Doc Review and Stream Day notes are OFF and say so on screen).
-   These values are public identifiers, not secrets. Access is controlled by firestore.rules. */
-window.FIREBASE_CONFIG = null;
-/* Example shape:
-window.FIREBASE_CONFIG = {
-  apiKey: "...",
+/* SCA Team HQ, Firebase project config. Pasted 10/6/2026. Not a secret: access is set by firestore.rules. */
+window.FIREBASE_CONFIG = { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDF2emuSg4lW--oaGe3FCXqf8IwtuCjcoM",
   authDomain: "sca-team-hq.firebaseapp.com",
+  databaseURL: "https://sca-team-hq-default-rtdb.firebaseio.com",
   projectId: "sca-team-hq",
   storageBucket: "sca-team-hq.firebasestorage.app",
-  messagingSenderId: "...",
-  appId: "..."
+  messagingSenderId: "965589699870",
+  appId: "1:965589699870:web:69bd52a1c6f1db7c03cd0f"
 };
-*/
