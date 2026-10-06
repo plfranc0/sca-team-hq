@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Who may read and write shared data. Add a line per person. Lowercase.
+    function allowed() {
+      return request.auth != null &&
+        request.auth.token.email.lower() in [
+          'patrick@focalpointmarketingagency.com',
+          'ADD-JJ@EMAIL.HERE',
+          'ADD-ULANI@EMAIL.HERE',
+          'ADD-KIRSTY@EMAIL.HERE',
+          'ADD-MAYA@EMAIL.HERE'
+        ];
+    }
+
+    // Personal data: tasks, brain dump, calendar setting. Only the owner.
+    match /users/{uid}/{document=**} {
+      allow read, write: if allowed() && request.auth.uid == uid;
+    }
+
+    // Shared: Doc Review queue, Stream Day tasks and notes.
+    match /reviewQueue/{doc}   { allow read, write: if allowed(); }
+    match /streamTasks/{doc}   { allow read, write: if allowed(); }
+    match /streamNotes/{doc}   { allow read, write: if allowed(); }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

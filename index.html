@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>She Creates Academy — Sales Team HQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>try{var s=localStorage.getItem('sca-hq-theme');if(s)document.documentElement.dataset.theme=s;}catch(e){}</script>
+<script src="./firebase-config.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{height:100%;}
+
+:root,[data-theme="day"]{
+  --bg:#F7F3ED;--bg-2:#EFE9E0;
+  --card:#FFFFFF;--card-2:#FBF7F0;--card-3:#F5E7E4;
+  --bdr:rgba(42,15,20,.1);--bdr-2:rgba(42,15,20,.2);
+  --text:#2A0F14;
+  --t2:rgba(42,15,20,.6);--t3:rgba(42,15,20,.34);--t4:rgba(42,15,20,.12);
+  --accent:#7A1420;--hbg:rgba(122,20,32,.05);
+  --shd:rgba(42,15,20,.08);--shd2:rgba(42,15,20,.16);
+  --sb-bg:#1C0B0F;--sb-text:#F7F3ED;
+  --sb-t2:rgba(247,243,237,.5);--sb-t3:rgba(247,243,237,.25);
+  --sb-bdr:rgba(247,243,237,.08);--sb-hbg:rgba(247,243,237,.07);
+  --tk:#F7F3ED;--tb:rgba(247,243,237,.25);--tt:#1C0B0F;--tl:rgba(247,243,237,.3);
+  --glow-rgb:196,60,80;
+}
+[data-theme="night"]{
+  --bg:#000;--bg-2:#040402;
+  --card:#0a0a08;--card-2:#0f0f0d;--card-3:#141412;
+  --bdr:rgba(247,243,237,.09);--bdr-2:rgba(247,243,237,.18);
+  --text:#EAE4D9;
+  --t2:rgba(247,243,237,.58);--t3:rgba(247,243,237,.27);--t4:rgba(247,243,237,.1);
+  --accent:#EAE4D9;--hbg:rgba(247,243,237,.03);
+  --shd:rgba(0,0,0,.5);--shd2:rgba(0,0,0,.8);
+  --sb-bg:#060604;--sb-text:#EAE4D9;
+  --sb-t2:rgba(247,243,237,.45);--sb-t3:rgba(247,243,237,.2);
+  --sb-bdr:rgba(247,243,237,.07);--sb-hbg:rgba(247,243,237,.06);
+  --tk:rgba(247,243,237,.12);--tb:rgba(247,243,237,.08);--tt:#EAE4D9;--tl:rgba(247,243,237,.18);
+  --glow-rgb:226,80,76;
+}
+
+::selection{background:var(--text);color:var(--bg);}
+body{
+  display:flex;height:100vh;overflow:hidden;
+  color:var(--text);
+  font-family:'Inter',-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .4s,color .4s;font-size:14px;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(closest-side,rgba(var(--glow-rgb),.22),transparent 70%),
+    radial-gradient(closest-side,rgba(var(--glow-rgb),.16),transparent 70%);
+  background-repeat:no-repeat;
+  background-size:58vw 58vw,46vw 46vw;
+  background-position:-8% -12%,112% 108%;
+  animation:ambientDrift 28s ease-in-out infinite alternate;
+}
+@keyframes ambientDrift{
+  0%{background-position:-8% -12%,112% 108%;}
+  50%{background-position:14% 4%,86% 88%;}
+  100%{background-position:2% -6%,96% 100%;}
+}
+@media(prefers-reduced-motion:reduce){
+  body{animation:none;}
+}
+
+/* ── Grain ── */
+.grain{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;
+  opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:300px 300px;
+}
+[data-theme="night"] .grain{opacity:.055;}
+
+/* ══════════════════════════
+   SIDEBAR
+══════════════════════════ */
+.sidebar{
+  width:224px;flex-shrink:0;
+  background:var(--sb-bg);
+  display:flex;flex-direction:column;
+  height:100vh;overflow-y:auto;overflow-x:hidden;
+  border-right:1px solid var(--sb-bdr);
+  transition:background .4s,border-color .4s;
+  scrollbar-width:none;
+}
+.sidebar::-webkit-scrollbar{display:none;}
+
+.sb-header{
+  padding:1.25rem 1.25rem 1rem;
+  border-bottom:1px solid var(--sb-bdr);
+  flex-shrink:0;
+}
+.sb-logo{display:flex;align-items:center;gap:.625rem;margin-bottom:.5rem;}
+.sb-logo-mark{
+  width:24px;height:24px;background:var(--sb-text);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.575rem;font-weight:900;color:var(--sb-bg);
+  transition:transform .25s cubic-bezier(.2,0,0,1);cursor:default;
+}
+.sb-logo-mark:hover{transform:rotate(-8deg) scale(1.12);box-shadow:0 0 18px rgba(var(--glow-rgb),.65);}
+.sb-logo-name{font-size:.675rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sb-text);transition:color .4s;}
+.sb-badge{
+  font-size:.475rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sb-t3);font-family:'SF Mono',monospace;font-weight:700;
+}
+
+.sb-nav{flex:1;padding:.75rem 0;}
+.sb-section-label{
+  font-size:.475rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--sb-t3);font-family:'SF Mono',monospace;
+  padding:.875rem 1.25rem .375rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:.625rem;
+  padding:.6rem 1.25rem;cursor:pointer;
+  font-size:.75rem;font-weight:500;color:var(--sb-t2);
+  transition:all .18s;position:relative;user-select:none;border-radius:0;
+}
+.nav-item::before{
+  content:'';position:absolute;left:0;top:.2rem;bottom:.2rem;
+  width:2px;background:var(--sb-text);
+  transform:scaleY(0);transform-origin:center;
+  transition:transform .2s cubic-bezier(.4,0,.2,1);border-radius:1px;
+}
+.nav-item:hover{background:var(--sb-hbg);color:var(--sb-text);padding-left:1.375rem;}
+.nav-item.active{background:var(--sb-hbg);color:var(--sb-text);font-weight:600;}
+.nav-item.active::before{transform:scaleY(1);box-shadow:0 0 8px 1px rgba(var(--glow-rgb),.9);}
+.nav-icon{font-size:.9rem;flex-shrink:0;width:18px;text-align:center;}
+
+.sb-divider{height:1px;background:var(--sb-bdr);margin:.5rem 1.25rem;}
+
+.nav-ext{
+  display:flex;align-items:center;gap:.625rem;justify-content:space-between;
+  padding:.6rem 1.25rem;cursor:pointer;
+  font-size:.75rem;font-weight:500;color:var(--sb-t2);
+  transition:all .18s;text-decoration:none;
+}
+.nav-ext:hover{background:var(--sb-hbg);color:var(--sb-text);}
+.ext-arr{font-size:.65rem;opacity:.5;}
+
+.sb-footer{
+  padding:1rem 1.25rem;border-top:1px solid var(--sb-bdr);
+  flex-shrink:0;
+}
+.sb-clock{
+  font-size:.525rem;letter-spacing:.08em;color:var(--sb-t3);
+  font-family:'SF Mono',monospace;margin-bottom:.75rem;
+}
+.toggle-row{display:flex;align-items:center;gap:.5rem;}
+.toggle-lbl{font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tl);font-family:'SF Mono',monospace;transition:color .4s;}
+.toggle-switch{
+  width:36px;height:20px;border-radius:10px;
+  background:var(--tk);border:1px solid var(--tb);
+  position:relative;cursor:pointer;transition:all .25s;flex-shrink:0;
+}
+.toggle-switch:hover{opacity:.9;box-shadow:0 0 10px rgba(var(--glow-rgb),.5);}
+.toggle-thumb{
+  position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;
+  background:var(--tt);transition:transform .3s cubic-bezier(.4,0,.2,1),background .25s;
+}
+[data-theme="night"] .toggle-thumb{transform:translateX(16px);}
+
+/* ══════════════════════════
+   MAIN
+══════════════════════════ */
+.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+
+.main-header{
+  height:52px;flex-shrink:0;
+  border-bottom:1px solid var(--bdr);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;background:var(--bg);
+  backdrop-filter:blur(20px);transition:background .4s,border-color .4s;
+}
+.mh-title{font-size:.625rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);}
+.mh-left{display:flex;align-items:center;gap:.875rem;}
+.mh-menu-btn{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.25rem;flex-shrink:0;}
+.mh-menu-btn svg{width:20px;height:20px;display:block;}
+.mh-right{display:flex;align-items:center;gap:.875rem;}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;}
+.sidebar-backdrop.show{display:block;}
+.internal-badge{
+  font-size:.475rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--text);color:var(--bg);border-radius:4px;
+  padding:.2rem .55rem;font-family:'SF Mono',monospace;font-weight:900;
+}
+
+.content{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--t4) transparent;}
+.content::-webkit-scrollbar{width:4px;}
+.content::-webkit-scrollbar-thumb{background:var(--t4);border-radius:2px;}
+
+/* ── Sections ── */
+.section{display:none;padding:2.5rem 2rem;min-height:calc(100vh - 52px);}
+.section.active{display:block;animation:secIn .3s cubic-bezier(.16,1,.3,1) both;}
+@keyframes secIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* Hub section: no padding, iframe fills */
+#sec-hub{padding:0;flex-direction:column;}
+#sec-hub.active{display:flex;}
+.hub-frame{
+  flex:1;width:100%;border:none;display:block;
+  min-height:calc(100vh - 52px);
+  opacity:0;transition:opacity .4s;
+}
+.hub-frame.loaded{opacity:1;}
+
+/* ══════════════════════════
+   DASHBOARD
+══════════════════════════ */
+.dash-header{margin-bottom:2rem;}
+.dash-date{
+  font-size:.525rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--t3);font-family:'SF Mono',monospace;margin-bottom:.5rem;
+}
+.dash-greeting{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;
+  line-height:1.1;letter-spacing:-.025em;color:var(--text);
+  background:linear-gradient(100deg,var(--text) 30%,rgba(var(--glow-rgb),1) 50%,var(--text) 70%);
+  background-size:250% auto;background-position:0% 50%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shineText 7s ease-in-out .3s infinite;
+}
+@keyframes shineText{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.dash-greeting em{font-style:italic;font-weight:400;}
+
+/* Today's call */
+.today-call{
+  background:var(--text);color:var(--bg);
+  border-radius:14px;padding:1.5rem 1.75rem;
+  margin-bottom:2rem;position:relative;overflow:hidden;
+  animation:slideRight .4s cubic-bezier(.16,1,.3,1) .1s both,pulseGlow 3.5s ease-in-out 1s infinite;
+}
+@keyframes slideRight{from{opacity:0;transform:translateX(-12px);}to{opacity:1;transform:translateX(0);}}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 8px 32px var(--shd),0 0 0 0 rgba(var(--glow-rgb),0);}
+  50%{box-shadow:0 8px 32px var(--shd),0 0 36px 4px rgba(var(--glow-rgb),.3);}
+}
+.today-call-pre{
+  font-size:.475rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(247,243,237,.45);font-family:'SF Mono',monospace;
+  font-weight:800;margin-bottom:.875rem;
+}
+.today-call-pre::before{
+  content:'';display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:rgba(var(--glow-rgb),1);box-shadow:0 0 8px 1px rgba(var(--glow-rgb),.9);
+  margin-right:.5rem;vertical-align:middle;animation:dotPulse 1.6s ease-in-out infinite;
+}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+[data-theme="day"] .today-call-pre{color:rgba(247,243,237,.4);}
+.today-call-inner{display:flex;align-items:center;gap:1.25rem;}
+.today-initials{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(247,243,237,.12);border:1px solid rgba(247,243,237,.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.875rem;font-weight:900;color:var(--bg);letter-spacing:-.02em;
+  flex-shrink:0;font-family:'Playfair Display',serif;
+}
+[data-theme="day"] .today-initials{color:#EAE4D9;}
+.today-info{}
+.today-tag{font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,243,237,.5);font-family:'SF Mono',monospace;margin-bottom:.3rem;}
+[data-theme="day"] .today-tag{color:rgba(247,243,237,.4);}
+.today-title{font-size:1.125rem;font-weight:700;color:var(--bg);}
+[data-theme="day"] .today-title{color:#EAE4D9;}
+.today-host{font-size:.75rem;font-weight:300;color:rgba(247,243,237,.55);margin-top:.2rem;}
+[data-theme="day"] .today-host{color:rgba(247,243,237,.45);}
+.today-call-bg{
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  font-family:'Playfair Display',serif;font-size:6rem;font-weight:900;
+  color:rgba(247,243,237,.04);pointer-events:none;user-select:none;letter-spacing:-.04em;
+}
+.rest-day{
+  background:var(--card-2);border:1px solid var(--bdr);
+  border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:2rem;
+  font-size:.875rem;color:var(--t2);font-weight:300;
+}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:2rem;}
+.stat-card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+  padding:1.25rem;transition:all .2s;cursor:default;position:relative;overflow:hidden;
+  animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+.stat-card:nth-child(1){animation-delay:.05s;}
+.stat-card:nth-child(2){animation-delay:.1s;}
+.stat-card:nth-child(3){animation-delay:.15s;}
+.stat-card:nth-child(4){animation-delay:.2s;}
+.stat-card::before{content:'';position:absolute;inset:0;background:var(--hbg);opacity:0;transition:opacity .2s;}
+.stat-card:hover::before{opacity:1;}
+.stat-card:hover{border-color:rgba(var(--glow-rgb),.55);transform:translateY(-2px);box-shadow:0 8px 32px var(--shd),0 0 24px rgba(var(--glow-rgb),.22);}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:900;color:var(--text);
+  letter-spacing:-.04em;line-height:1;margin-bottom:.375rem;
+  transition:color .4s,text-shadow .3s;
+}
+.stat-card:hover .stat-num{text-shadow:0 0 18px rgba(var(--glow-rgb),.55);}
+.stat-label{font-size:.525rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);font-family:'SF Mono',monospace;}
+.stat-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.375rem;vertical-align:middle;}
+.dot-green{background:#3d7a50;box-shadow:0 0 6px rgba(61,122,80,.6);}
+.dot-amber{background:#8a6a20;box-shadow:0 0 6px rgba(138,106,32,.55);}
+.dot-red{background:#8a3030;box-shadow:0 0 6px rgba(138,48,48,.55);}
+[data-theme="night"] .dot-green{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.75);}
+[data-theme="night"] .dot-amber{background:#c9a96e;box-shadow:0 0 8px rgba(201,169,110,.6);}
+[data-theme="night"] .dot-red{background:#e06060;box-shadow:0 0 8px rgba(224,96,96,.65);}
+
+/* Quick launch */
+@keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.section-label{
+  font-size:.525rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--t3);font-family:'SF Mono',monospace;margin-bottom:1rem;
+}
+.section-label::before{
+  content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:rgba(var(--glow-rgb),1);box-shadow:0 0 6px 1px rgba(var(--glow-rgb),.8);
+  margin-right:.5rem;vertical-align:middle;animation:dotPulse 2s ease-in-out infinite;
+}
+.launch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:2.5rem;}
+.launch-card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+  padding:1.25rem;text-decoration:none;color:var(--text);
+  transition:all .2s;display:block;position:relative;overflow:hidden;
+  cursor:pointer;animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+.launch-grid .launch-card:nth-child(1){animation-delay:.15s;}
+.launch-grid .launch-card:nth-child(2){animation-delay:.2s;}
+.launch-grid .launch-card:nth-child(3){animation-delay:.25s;}
+.launch-grid .launch-card:nth-child(4){animation-delay:.3s;}
+.launch-grid .launch-card:nth-child(5){animation-delay:.35s;}
+.launch-grid .launch-card:nth-child(6){animation-delay:.4s;}
+.launch-card::before{content:'';position:absolute;inset:0;background:var(--hbg);opacity:0;transition:opacity .2s;}
+.launch-card:hover::before{opacity:1;}
+.launch-card:hover{border-color:rgba(var(--glow-rgb),.55);transform:translateY(-3px);box-shadow:0 12px 36px var(--shd),0 0 30px rgba(var(--glow-rgb),.25);}
+.launch-card.primary{background:var(--text);border-color:var(--text);}
+.launch-card.primary:hover{opacity:.95;transform:translateY(-3px);box-shadow:0 12px 40px rgba(var(--glow-rgb),.4);}
+.launch-card.primary::before{background:transparent;}
+.lc-icon{font-size:1.25rem;margin-bottom:.75rem;}
+.lc-title{font-size:.825rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
+.launch-card.primary .lc-title{color:var(--bg);}
+.lc-desc{font-size:.7rem;color:var(--t2);font-weight:300;line-height:1.6;}
+.launch-card.primary .lc-desc{color:rgba(247,243,237,.55);}
+[data-theme="day"] .launch-card.primary .lc-desc{color:rgba(247,243,237,.5);}
+.lc-arr{font-size:.65rem;color:var(--t3);margin-top:.5rem;transition:transform .2s;}
+.launch-card:hover .lc-arr{transform:translateX(3px);}
+.launch-card.primary .lc-arr{color:rgba(247,243,237,.45);}
+
+/* Weekly at a glance */
+.week-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin-bottom:2rem;}
+.week-day{
+  background:var(--card);border:1px solid var(--bdr);border-radius:10px;
+  padding:.875rem .75rem;text-align:center;transition:all .2s;
+  animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+.week-grid .week-day:nth-child(1){animation-delay:.1s;}
+.week-grid .week-day:nth-child(2){animation-delay:.15s;}
+.week-grid .week-day:nth-child(3){animation-delay:.2s;}
+.week-grid .week-day:nth-child(4){animation-delay:.25s;}
+.week-grid .week-day:nth-child(5){animation-delay:.3s;}
+.week-grid .week-day:nth-child(6){animation-delay:.35s;}
+.week-day.today{background:var(--text);border-color:var(--text);box-shadow:0 0 24px rgba(var(--glow-rgb),.3);}
+.week-day:hover{border-color:rgba(var(--glow-rgb),.55);transform:translateY(-2px);box-shadow:0 0 18px rgba(var(--glow-rgb),.2);}
+.wd-name{font-size:.475rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:.5rem;font-family:'SF Mono',monospace;}
+.week-day.today .wd-name{color:rgba(247,243,237,.5);}
+[data-theme="day"] .week-day.today .wd-name{color:rgba(247,243,237,.45);}
+.wd-title{font-size:.65rem;font-weight:600;color:var(--text);line-height:1.4;}
+.week-day.today .wd-title{color:var(--bg);}
+[data-theme="day"] .week-day.today .wd-title{color:#EAE4D9;}
+.wd-host{font-size:.55rem;color:var(--t3);margin-top:.25rem;font-weight:300;}
+.week-day.today .wd-host{color:rgba(247,243,237,.4);}
+[data-theme="day"] .week-day.today .wd-host{color:rgba(247,243,237,.35);}
+
+/* ══════════════════════════
+   RESOURCES
+══════════════════════════ */
+.res-group{margin-bottom:2.5rem;}
+.res-group-title{
+  font-size:.525rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--t3);font-family:'SF Mono',monospace;
+  padding-bottom:.625rem;border-bottom:1px solid var(--bdr);
+  margin-bottom:1rem;
+}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.625rem;}
+.res-card{
+  display:flex;align-items:flex-start;gap:.75rem;
+  background:var(--card);border:1px solid var(--bdr);border-radius:10px;
+  padding:1rem;text-decoration:none;color:var(--text);
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.res-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(var(--glow-rgb),1);box-shadow:0 0 8px rgba(var(--glow-rgb),.8);transform:scaleY(0);transform-origin:top;transition:transform .22s cubic-bezier(.4,0,.2,1);}
+.res-card:hover::before{transform:scaleY(1);}
+.res-card:hover{background:var(--hbg);border-color:rgba(var(--glow-rgb),.45);padding-left:calc(1rem + 4px);box-shadow:0 0 20px rgba(var(--glow-rgb),.15);}
+.res-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem;}
+.res-name{font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:.2rem;transition:color .3s;}
+.res-desc{font-size:.675rem;color:var(--t2);line-height:1.6;font-weight:300;}
+.res-ext{
+  display:inline-block;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--t3);margin-left:.375rem;vertical-align:middle;
+}
+
+/* ══════════════════════════
+   TEAM
+══════════════════════════ */
+.team-grid{display:flex;flex-direction:column;gap:.625rem;}
+.team-card{
+  display:flex;align-items:flex-start;gap:1.125rem;
+  background:var(--card);border:1px solid var(--bdr);border-radius:12px;
+  padding:1.25rem 1.5rem;transition:all .22s;position:relative;overflow:hidden;
+}
+.team-card::before{content:'';position:absolute;inset:0;background:var(--hbg);opacity:0;transition:opacity .22s;pointer-events:none;}
+.team-card:hover::before{opacity:1;}
+.team-card:hover{border-color:rgba(var(--glow-rgb),.5);transform:translateX(4px);box-shadow:0 0 22px rgba(var(--glow-rgb),.18);}
+.team-avatar{
+  width:40px;height:40px;border-radius:50%;background:var(--card-3);
+  border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:.875rem;font-weight:700;
+  color:var(--t2);flex-shrink:0;transition:all .22s;
+}
+.team-card:hover .team-avatar{background:var(--text);color:var(--bg);border-color:var(--text);box-shadow:0 0 14px rgba(var(--glow-rgb),.6);}
+.team-info{flex:1;position:relative;z-index:1;}
+.team-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;}
+.team-role{font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);font-family:'SF Mono',monospace;margin-bottom:.5rem;}
+.team-focus{font-size:.75rem;color:var(--t2);line-height:1.7;font-weight:300;}
+.team-focus strong{color:var(--text);font-weight:600;}
+.team-tag{
+  display:inline-block;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--hbg);border:1px solid var(--bdr);border-radius:4px;
+  padding:.15rem .4rem;font-family:'SF Mono',monospace;font-weight:700;
+  color:var(--t3);margin-right:.3rem;margin-top:.5rem;
+}
+
+/* ══════════════════════════
+   BRAIN DUMP
+══════════════════════════ */
+.calendar-card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:14px;
+  overflow:hidden;margin-bottom:2.5rem;transition:all .2s;
+}
+.calendar-card:hover{border-color:rgba(var(--glow-rgb),.4);box-shadow:0 0 24px rgba(var(--glow-rgb),.15);}
+.calendar-frame{width:100%;height:480px;border:none;display:block;transition:filter .4s;}
+.calendar-placeholder{
+  padding:2.5rem 2rem;text-align:center;color:var(--t2);
+}
+.calendar-placeholder-icon{font-size:1.75rem;margin-bottom:.75rem;}
+.calendar-placeholder-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.375rem;}
+.calendar-placeholder-desc{font-size:.75rem;color:var(--t2);max-width:44ch;margin:0 auto;line-height:1.7;font-weight:300;}
+/* Google's embed has no native dark mode — invert it to match night theme */
+[data-theme="night"] .calendar-frame,
+[data-theme="night"] .calendar-mini-frame{filter:invert(90%) hue-rotate(180deg) contrast(95%);}
+
+/* Tasks */
+.task-add-row{display:flex;gap:.5rem;margin-bottom:.875rem;}
+.task-input{
+  flex:1;background:var(--card);border:1px solid var(--bdr-2);border-radius:8px;
+  padding:.65rem .875rem;font-size:.8rem;color:var(--text);font-family:'Inter',sans-serif;
+  transition:border-color .2s,box-shadow .2s;
+}
+.task-input:focus{outline:none;border-color:rgba(var(--glow-rgb),.55);box-shadow:0 0 18px rgba(var(--glow-rgb),.15);}
+.task-input::placeholder{color:var(--t3);}
+.task-add-btn{
+  background:var(--text);color:var(--bg);border:none;border-radius:8px;
+  padding:.65rem 1.125rem;font-size:.7rem;font-weight:700;cursor:pointer;
+  transition:opacity .15s;font-family:'Inter',sans-serif;flex-shrink:0;
+}
+.task-add-btn:hover{opacity:.85;}
+.task-list{display:flex;flex-direction:column;gap:2px;}
+.task-item{display:flex;align-items:center;gap:.75rem;padding:.5rem .5rem;border-radius:8px;transition:background .15s;}
+.task-item:hover{background:var(--hbg);}
+.task-check{
+  width:17px;height:17px;border-radius:5px;border:1.5px solid var(--bdr-2);
+  background:transparent;cursor:pointer;flex-shrink:0;position:relative;transition:all .15s;
+}
+.task-check.done{background:rgba(var(--glow-rgb),1);border-color:rgba(var(--glow-rgb),1);box-shadow:0 0 10px rgba(var(--glow-rgb),.6);}
+.task-check.done::after{content:'';position:absolute;left:3px;top:0;width:5px;height:9px;border:2px solid var(--bg);border-top:none;border-left:none;transform:rotate(45deg);}
+.task-text{flex:1;font-size:.8rem;color:var(--text);cursor:pointer;}
+.task-text.done{color:var(--t3);text-decoration:line-through;}
+.task-del{background:none;border:none;color:var(--t3);cursor:pointer;font-size:.85rem;padding:.2rem;opacity:0;transition:opacity .15s;flex-shrink:0;}
+.task-item:hover .task-del{opacity:1;}
+.task-del:hover{color:#8a3030;}
+.task-empty{font-size:.75rem;color:var(--t3);padding:.75rem .5rem;font-weight:300;}
+
+/* Doc review tracker */
+.review-add{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:1.25rem 1.375rem;margin-bottom:1.5rem;}
+.review-add-row{display:flex;gap:.5rem;margin-bottom:.5rem;}
+.review-add-row:last-child{margin-bottom:0;}
+.review-input{flex:1;background:var(--card-2);border:1px solid var(--bdr-2);border-radius:8px;padding:.6rem .8rem;font-size:.8rem;color:var(--text);font-family:'Inter',sans-serif;}
+.review-input:focus{outline:none;border-color:rgba(var(--glow-rgb),.55);box-shadow:0 0 18px rgba(var(--glow-rgb),.15);}
+.review-input::placeholder{color:var(--t3);}
+.review-select{background:var(--card-2);border:1px solid var(--bdr-2);border-radius:8px;padding:.6rem .7rem;font-size:.75rem;color:var(--text);font-family:'Inter',sans-serif;flex-shrink:0;}
+.review-textarea{width:100%;background:var(--card-2);border:1px solid var(--bdr-2);border-radius:8px;padding:.6rem .8rem;font-size:.78rem;color:var(--text);font-family:'Inter',sans-serif;resize:vertical;min-height:2.25rem;}
+.review-textarea:focus{outline:none;border-color:rgba(var(--glow-rgb),.55);}
+.review-textarea::placeholder{color:var(--t3);}
+.review-add-btn{background:var(--text);color:var(--bg);border:none;border-radius:8px;padding:.6rem 1.125rem;font-size:.7rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;flex-shrink:0;}
+.review-add-btn:hover{opacity:.85;}
+.review-list{display:flex;flex-direction:column;gap:.625rem;}
+.review-item{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:1rem 1.25rem;transition:all .2s;}
+.review-item:hover{border-color:rgba(var(--glow-rgb),.4);box-shadow:0 0 18px rgba(var(--glow-rgb),.15);}
+.review-item-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.4rem;}
+.review-item-title{font-size:.85rem;font-weight:700;color:var(--text);text-decoration:none;}
+.review-item-title:hover{text-decoration:underline;}
+.review-item-title.no-link{cursor:default;}
+.review-badge{display:inline-flex;align-items:center;font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .6rem;border-radius:6px;font-family:'SF Mono',monospace;flex-shrink:0;}
+.review-badge.pending{background:rgba(138,106,32,.14);color:#8a6a20;}
+.review-badge.approved{background:rgba(61,122,80,.14);color:#3d7a50;}
+.review-badge.changes{background:rgba(138,48,48,.14);color:#8a3030;}
+[data-theme="night"] .review-badge.pending{background:rgba(201,169,110,.14);color:#c9a96e;}
+[data-theme="night"] .review-badge.approved{background:rgba(74,222,128,.14);color:#4ade80;}
+[data-theme="night"] .review-badge.changes{background:rgba(224,96,96,.14);color:#e06060;}
+.review-item-notes{font-size:.75rem;color:var(--t2);line-height:1.6;font-weight:300;margin-bottom:.5rem;}
+.review-item-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+.review-item-meta{font-size:.6rem;color:var(--t3);font-family:'SF Mono',monospace;}
+.review-item-del{background:none;border:none;color:var(--t3);cursor:pointer;font-size:.7rem;font-family:'SF Mono',monospace;text-transform:uppercase;letter-spacing:.05em;}
+.review-item-del:hover{color:#8a3030;}
+
+/* Dashboard "Today" widgets */
+.dash-widgets{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.tasks-mini{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:1.25rem 1.375rem;transition:all .2s;}
+.tasks-mini:hover{border-color:rgba(var(--glow-rgb),.4);box-shadow:0 0 24px rgba(var(--glow-rgb),.15);}
+.calendar-mini-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;transition:all .2s;}
+.calendar-mini-card:hover{border-color:rgba(var(--glow-rgb),.4);box-shadow:0 0 24px rgba(var(--glow-rgb),.15);}
+.calendar-mini-frame{width:100%;height:266px;border:none;display:block;transition:filter .4s;}
+.calendar-mini-placeholder{padding:1.5rem 1.25rem;text-align:center;}
+@media(max-width:700px){.dash-widgets{grid-template-columns:1fr;}}
+
+.notes-wrap{position:relative;}
+.notes-area{
+  width:100%;min-height:360px;resize:vertical;
+  background:var(--card);border:1px solid var(--bdr);border-radius:14px;
+  padding:1.5rem;font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.8;
+  color:var(--text);transition:border-color .2s,box-shadow .2s;
+}
+.notes-area:focus{outline:none;border-color:rgba(var(--glow-rgb),.55);box-shadow:0 0 28px rgba(var(--glow-rgb),.18);}
+.notes-area::placeholder{color:var(--t3);}
+.notes-footer{display:flex;justify-content:space-between;align-items:center;margin-top:.75rem;}
+.notes-status{font-size:.65rem;color:var(--t3);font-family:'SF Mono',monospace;letter-spacing:.04em;}
+.notes-status.saved{color:var(--good,#3d7a50);}
+.notes-clear{
+  font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--t3);background:none;border:1px solid var(--bdr);border-radius:6px;
+  padding:.35rem .7rem;cursor:pointer;font-family:'SF Mono',monospace;transition:all .15s;
+}
+.notes-clear:hover{color:var(--text);border-color:rgba(var(--glow-rgb),.5);}
+
+/* ══════════════════════════
+   PLAYBOOKS
+══════════════════════════ */
+.pb-list{display:flex;flex-direction:column;gap:.5rem;}
+.pb-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--card);border:1px solid var(--bdr);border-radius:10px;
+  padding:1rem 1.25rem;text-decoration:none;color:var(--text);
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.pb-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(var(--glow-rgb),1);box-shadow:0 0 8px rgba(var(--glow-rgb),.8);transform:scaleY(0);transform-origin:top;transition:transform .22s cubic-bezier(.4,0,.2,1);}
+.pb-item:hover::before{transform:scaleY(1);}
+.pb-item:hover{background:var(--hbg);border-color:rgba(var(--glow-rgb),.45);padding-left:calc(1.25rem + 5px);box-shadow:0 0 18px rgba(var(--glow-rgb),.15);}
+.pb-icon{font-size:.9rem;width:20px;text-align:center;flex-shrink:0;}
+.pb-title{font-size:.825rem;font-weight:600;color:var(--text);flex:1;}
+.pb-tag{font-size:.475rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-family:'SF Mono',monospace;font-weight:700;}
+.pb-arr{font-size:.65rem;color:var(--t4);transition:transform .2s;}
+.pb-item:hover .pb-arr{transform:translateX(3px);}
+
+/* ── Page header shared ── */
+.page-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,3vw,2rem);font-weight:700;
+  letter-spacing:-.025em;color:var(--text);
+  margin-bottom:.5rem;
+}
+.page-sub{font-size:.85rem;color:var(--t2);line-height:1.7;font-weight:300;max-width:60ch;margin-bottom:2rem;}
+.page-sub strong{color:var(--text);font-weight:600;}
+
+/* ── Mobile ── */
+@media(max-width:700px){
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;z-index:1000;
+    transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 0 40px rgba(0,0,0,.4);
+  }
+  .sidebar.open{transform:translateX(0);}
+  .mh-menu-btn{display:flex;align-items:center;justify-content:center;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .launch-grid{grid-template-columns:1fr 1fr;}
+  .week-grid{grid-template-columns:repeat(3,1fr);}
+  .section{padding:1.5rem 1.25rem;}
+}
+
+/* ── SCA additions ── */
+.auth-btn{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;padding:.45rem .85rem;border-radius:8px;border:1px solid var(--bdr-2);background:var(--card);color:var(--text);cursor:pointer;transition:all .2s;}
+.auth-btn:hover{border-color:rgba(var(--glow-rgb),.6);box-shadow:0 0 14px rgba(var(--glow-rgb),.2);}
+.auth-email{font-size:.625rem;color:var(--t2);margin-right:.6rem;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mh-right{display:flex;align-items:center;gap:.5rem;}
+.banner{border:1px solid var(--bdr-2);background:var(--card-2);border-radius:12px;padding:.9rem 1.1rem;font-size:.775rem;color:var(--t2);margin-bottom:1.5rem;line-height:1.55;}
+.banner strong{color:var(--text);}
+.banner.warn{border-color:rgba(226,80,76,.45);}
+.stat-sub{font-size:.55rem;color:var(--t3);margin-top:.3rem;font-family:'SF Mono',monospace;letter-spacing:.04em;}
+.stats-meta{font-size:.65rem;color:var(--t3);margin:-.9rem 0 1.5rem;}
+.stats-meta a{color:var(--t2);}
+.ros-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;}
+.ros-item{display:grid;grid-template-columns:72px 1fr;gap:1rem;align-items:start;padding:.8rem 1rem;background:var(--card);border:1px solid var(--bdr);border-radius:10px;}
+.ros-time{font-family:'SF Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;color:var(--accent);padding-top:.15rem;}
+.ros-what{font-size:.8rem;color:var(--text);font-weight:600;}
+.ros-why{font-size:.7rem;color:var(--t2);margin-top:.2rem;line-height:1.5;}
+.cal-override{display:flex;gap:.5rem;margin-top:.75rem;}
+.cal-override input{flex:1;}
+.small-note{font-size:.65rem;color:var(--t3);margin-top:.5rem;line-height:1.5;}
+.team-sub{font-size:.7rem;color:var(--t3);margin:-.5rem 0 1rem;}
+.dnu{opacity:.75;}
+.dnu .res-name{text-decoration:line-through;}
+.stats-row{grid-template-columns:repeat(6,1fr);}
+@media(max-width:1100px){.stats-row{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:700px){.stats-row{grid-template-columns:repeat(2,1fr);}}
+.ros-why a{color:var(--accent);font-weight:600;}
+@media(max-width:700px){.ros-item{grid-template-columns:1fr;gap:.25rem;}.auth-email{display:none;}}
+
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+<!-- ══ SIDEBAR ══ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-header">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">SC</div>
+      <span class="sb-logo-name">She Creates</span>
+    </div>
+    <div class="sb-badge">Sales Team HQ</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section-label">Navigation</div>
+    <div class="nav-item active" data-sec="dash" onclick="goTo('dash')"><span class="nav-icon">🏠</span> Dashboard</div>
+    <div class="nav-item" data-sec="notes" onclick="goTo('notes')"><span class="nav-icon">🧠</span> Brain Dump</div>
+    <div class="nav-item" data-sec="pipeline" onclick="goTo('pipeline')"><span class="nav-icon">📈</span> Pipeline</div>
+    <div class="nav-item" data-sec="streamday" onclick="goTo('streamday')"><span class="nav-icon">🎥</span> Stream Day</div>
+    <div class="nav-item" data-sec="resources" onclick="goTo('resources')"><span class="nav-icon">📚</span> Resources</div>
+    <div class="nav-item" data-sec="team" onclick="goTo('team')"><span class="nav-icon">🤝</span> Team</div>
+    <div class="nav-item" data-sec="review" onclick="goTo('review')"><span class="nav-icon">📥</span> Doc Review</div>
+    <div class="nav-item" data-sec="playbooks" onclick="goTo('playbooks')"><span class="nav-icon">📋</span> Playbooks</div>
+    <div class="sb-divider" style="margin-top:.75rem;"></div>
+    <div class="sb-section-label" style="margin-top:.25rem;">Quick Open</div>
+    <a class="nav-ext" href="./training-bible.html" target="_blank"><span style="display:flex;align-items:center;gap:.625rem;"><span class="nav-icon">🎓</span> Training Bible</span><span class="ext-arr">↗</span></a>
+    <a class="nav-ext" href="https://plfranc0.github.io/sca-dashboard/" target="_blank"><span style="display:flex;align-items:center;gap:.625rem;"><span class="nav-icon">📊</span> SCA Dashboard</span><span class="ext-arr">↗</span></a>
+    <a class="nav-ext" href="https://plfranc0.github.io/sca-commission-hq/" target="_blank"><span style="display:flex;align-items:center;gap:.625rem;"><span class="nav-icon">💵</span> Commission HQ</span><span class="ext-arr">↗</span></a>
+    <a class="nav-ext" href="https://app.gohighlevel.com/" target="_blank"><span style="display:flex;align-items:center;gap:.625rem;"><span class="nav-icon">📞</span> GoHighLevel</span><span class="ext-arr">↗</span></a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-clock" id="clock"></div>
+    <div class="toggle-row">
+      <span class="toggle-lbl" id="mode-lbl">Day</span>
+      <div class="toggle-switch" onclick="toggleTheme()"><div class="toggle-thumb"></div></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+  <div class="main-header">
+    <div class="mh-left">
+      <button class="mh-menu-btn" onclick="openSidebar()" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <span class="mh-title" id="mh-title">Dashboard</span>
+    </div>
+    <div class="mh-right">
+      <span class="auth-email" id="auth-email"></span>
+      <button class="auth-btn" id="auth-btn" onclick="hqSignIn()">Sign in with Google</button>
+      <span class="internal-badge">Internal — Confidential</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- ── DASHBOARD ── -->
+    <div id="sec-dash" class="section active">
+      <div class="dash-header">
+        <div class="dash-date" id="dash-date"></div>
+        <div class="dash-greeting">Good <em id="greeting-time">morning</em>, <span id="greeting-name">team</span>.</div>
+      </div>
+      <div id="fb-banner"></div>
+      <div id="today-call-wrap"></div>
+
+      <div class="section-label">Today</div>
+      <div class="dash-widgets">
+        <div class="tasks-mini">
+          <div class="task-add-row">
+            <input type="text" id="task-input-mini" class="task-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTask('task-input-mini')">
+            <button class="task-add-btn" onclick="addTask('task-input-mini')">Add</button>
+          </div>
+          <div class="task-list" id="task-list-mini"><div class="task-empty">Sign in to see your tasks.</div></div>
+        </div>
+        <div class="calendar-mini-card">
+          <div class="calendar-mini-placeholder" id="calendar-mini-placeholder">
+            <div class="calendar-placeholder-icon">📅</div>
+            <div class="calendar-placeholder-title">Your calendar</div>
+            <div class="calendar-placeholder-desc">Sign in with Google and your own calendar shows up here. Each person sees their own.</div>
+          </div>
+          <iframe id="calendar-mini-iframe" class="calendar-mini-frame" style="display:none;" src="" title="Calendar" frameborder="0" scrolling="no"></iframe>
+        </div>
+      </div>
+
+      <div class="section-label">This Stream Week</div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="st-reg">—</div><div class="stat-label">Registered</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-att">—</div><div class="stat-label"><span class="stat-dot dot-green"></span>Attended live</div><div class="stat-sub" id="st-att-sub"></div></div>
+        <div class="stat-card"><div class="stat-num" id="st-apps">—</div><div class="stat-label">Applied</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-booked">—</div><div class="stat-label"><span class="stat-dot dot-amber"></span>Booked (stream day)</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-closes">—</div><div class="stat-label">Closes</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-cash">—</div><div class="stat-label"><span class="stat-dot dot-red"></span>Cash collected</div></div>
+      </div>
+      <div class="stats-meta" id="stats-meta">Loading the Weekly Scorecard…</div>
+
+      <div class="section-label">Quick Launch</div>
+      <div class="launch-grid">
+        <div class="launch-card primary" onclick="goTo('pipeline')">
+          <div class="lc-icon">📈</div><div class="lc-title">Pipeline</div>
+          <div class="lc-desc">The SCA Dashboard: funnel, closers, cancels, cash, by stream week.</div><div class="lc-arr">→</div>
+        </div>
+        <a class="launch-card" href="https://docs.google.com/forms/d/e/1FAIpQLSc9hAzDH-u-6qSKWlITRnHR3BORjYHnhGT6kbdROmBU0qJvTA/viewform" target="_blank">
+          <div class="lc-icon">📝</div><div class="lc-title">End of Call Form</div>
+          <div class="lc-desc">Within 10 minutes of every call. No form, no record, no commission.</div><div class="lc-arr">↗</div>
+        </a>
+        <a class="launch-card" href="https://docs.google.com/spreadsheets/d/1es0J7WvC-03HL5i2PF3nLKQg32Hoi7Zqb0Z_AImsmRY/edit" target="_blank">
+          <div class="lc-icon">💳</div><div class="lc-title">Checkout Links Sheet</div>
+          <div class="lc-desc">Every payment option in one place. BNPL first. Open on every call.</div><div class="lc-arr">↗</div>
+        </a>
+        <a class="launch-card" href="https://plfranc0.github.io/sca-commission-hq/" target="_blank">
+          <div class="lc-icon">💵</div><div class="lc-title">Commission HQ</div>
+          <div class="lc-desc">What each rep is owed and what has been paid. Closers 10%, setters $50 per close.</div><div class="lc-arr">↗</div>
+        </a>
+        <a class="launch-card" href="https://drive.google.com/drive/folders/1rqvkroLDkxbrripSXAQcNmorIGTaRLnQ" target="_blank">
+          <div class="lc-icon">📚</div><div class="lc-title">SOP Library</div>
+          <div class="lc-desc">The 8 evergreen sales docs: scripts, call framework, financing, reporting.</div><div class="lc-arr">↗</div>
+        </a>
+        <a class="launch-card" href="./training-bible.html" target="_blank">
+          <div class="lc-icon">🎓</div><div class="lc-title">Training Bible</div>
+          <div class="lc-desc">JJ's master reference for the team. Being written.</div><div class="lc-arr">↗</div>
+        </a>
+      </div>
+
+      <div class="section-label">The Week</div>
+      <div class="week-grid" id="week-grid"></div>
+    </div>
+
+    <!-- ── BRAIN DUMP ── -->
+    <div id="sec-notes" class="section">
+      <div class="page-title">Brain Dump</div>
+      <div class="page-sub">Your calendar, your tasks, your scratchpad. Private to you, saved to your account, same on every device.</div>
+      <div class="section-label">Your Calendar</div>
+      <div class="calendar-card">
+        <div class="calendar-placeholder" id="calendar-placeholder">
+          <div class="calendar-placeholder-icon">📅</div>
+          <div class="calendar-placeholder-title">Sign in to see your calendar</div>
+          <div class="calendar-placeholder-desc">This shows the Google Calendar of whoever is signed in. If yours lives on a different Google account, paste that calendar's embed link below (Google Calendar → Settings → your calendar → Integrate calendar → Embed code, copy the src URL).</div>
+        </div>
+        <iframe id="calendar-iframe" class="calendar-frame" style="display:none;" src="" title="Google Calendar" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="cal-override">
+        <input type="text" id="cal-override-input" class="task-input" placeholder="Optional: a different calendar embed URL (https://calendar.google.com/calendar/embed?src=...)">
+        <button class="task-add-btn" onclick="saveCalOverride()">Save</button>
+        <button class="notes-clear" onclick="clearCalOverride()">Reset</button>
+      </div>
+      <div class="small-note">Safari blocks the embedded calendar for private calendars. Chrome shows it when you are logged into the same Google account.</div>
+
+      <div class="section-label">Tasks</div>
+      <div class="task-add-row">
+        <input type="text" id="task-input-full" class="task-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTask('task-input-full')">
+        <button class="task-add-btn" onclick="addTask('task-input-full')">Add</button>
+      </div>
+      <div class="task-list" id="task-list-full" style="margin-bottom:2rem;"><div class="task-empty">Sign in to see your tasks.</div></div>
+
+      <div class="section-label">Notes</div>
+      <div class="notes-wrap">
+        <textarea id="notes-area" class="notes-area" placeholder="Dump it all here. Ideas, to-dos, half-formed thoughts. Nothing here is graded."></textarea>
+        <div class="notes-footer">
+          <span class="notes-status" id="notes-status">Sign in to save notes</span>
+          <button class="notes-clear" onclick="clearNotes()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PIPELINE ── -->
+    <div id="sec-pipeline" class="section">
+      <div class="banner" style="margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <span><strong>SCA Dashboard</strong>, live from the Master Tracker. Funnel by stream week, closer and setter stats, cancel rate, cash.</span>
+        <span style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <a class="auth-btn" href="https://plfranc0.github.io/sca-dashboard/" target="_blank">Open full screen ↗</a>
+          <a class="auth-btn" href="https://app.gohighlevel.com/" target="_blank">GHL pipelines ↗</a>
+        </span>
+      </div>
+      <iframe id="hub-iframe" class="hub-frame" src="" title="SCA Dashboard" allowfullscreen></iframe>
+    </div>
+
+    <!-- ── STREAM DAY ── -->
+    <div id="sec-streamday" class="section">
+      <div class="page-title">Stream Day</div>
+      <div class="page-sub">Thursday is the heartbeat. Gigi goes live at <strong>4:00 PM PT</strong> and the whole week's pipeline arrives in about two hours. This is the run of show, plus a shared to-do list and notes for the team.</div>
+
+      <div class="section-label">Run of Show (Thursday)</div>
+      <div class="ros-list">
+        <div class="ros-item"><div class="ros-time">3:30 PM</div><div><div class="ros-what">Confirm coverage for the application wave</div><div class="ros-why">Who is on triage tonight, who takes qualified applications first, who covers the New Calls channel. Every hot lead needs an owner before the room opens.</div></div></div>
+        <div class="ros-item"><div class="ros-time">3:55 PM</div><div><div class="ros-what">Someone from the team is in the Zoom room</div><div class="ros-why">Watch the chat, catch tech issues, and be ready to drop the apply link.</div></div></div>
+        <div class="ros-item"><div class="ros-time">~4:40 PM</div><div><div class="ros-what">The pitch lands. Apply link in chat within 4 minutes.</div><div class="ros-why">Every minute of delay costs applications. The week it took 8 minutes, applications per attendee dropped 15 points. Under 4 is the target.</div></div></div>
+        <div class="ros-item"><div class="ros-time">5:00 PM on</div><div><div class="ros-what">Speed to lead on every qualified application: under 15 minutes</div><div class="ros-why">Qualified applications ping <a href="https://discord.com/channels/1522608399198720281/1547370374583291937" target="_blank">#qualified-app</a>. Call, then text. A setter call cuts no-shows from 22% to 8%.</div></div></div>
+        <div class="ros-item"><div class="ros-time">5:00 PM on</div><div><div class="ros-what">Triage every new booking tonight</div><div class="ros-why">Bookings ping <a href="https://discord.com/channels/1522608399198720281/1522609573196857455" target="_blank">New Calls</a>. Every booking is auto-marked confirmed by the system, so that field means nothing. A real YES from the lead is the only confirmation. Triage is a setter job, never the closer who owns the call.</div></div></div>
+        <div class="ros-item"><div class="ros-time">Midnight</div><div><div class="ros-what">Every hot lead has an owner and a next touch</div><div class="ros-why">Unbooked qualified applicants and anyone who cancelled go into tomorrow's chase. In September these got zero outreach. That is the biggest leak after checkout.</div></div></div>
+        <div class="ros-item"><div class="ros-time">Every call</div><div><div class="ros-what">End of Call form within 10 minutes</div><div class="ros-why">Feeds pay, the dashboard and coaching. <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9hAzDH-u-6qSKWlITRnHR3BORjYHnhGT6kbdROmBU0qJvTA/viewform" target="_blank">The form</a>. Show or no-show, one per call.</div></div></div>
+      </div>
+
+      <div class="highlight amber" style="margin-bottom:1.25rem;">
+        <h3>Shared with the team</h3>
+        <p>The to-dos and notes below are live for everyone on the approved list. Sign in to add or change anything.</p>
+      </div>
+      <div class="section-label">Shared To-Dos</div>
+      <div class="task-add-row">
+        <input type="text" id="stream-task-input" class="task-input" placeholder="Add a team task..." onkeydown="if(event.key==='Enter')streamAddTask()">
+        <button class="task-add-btn" onclick="streamAddTask()">Add</button>
+      </div>
+      <div class="task-list" id="stream-task-list" style="margin-bottom:2rem;"><div class="task-empty">Sign in to see shared tasks.</div></div>
+      <div class="section-label">Shared Notes</div>
+      <div class="notes-wrap">
+        <textarea id="stream-notes-area" class="notes-area" placeholder="What happened tonight, what to fix for next week, who owns what. Shared live with the team."></textarea>
+        <div class="notes-footer">
+          <span class="notes-status" id="stream-notes-status">Sign in to edit</span>
+          <button class="notes-clear" onclick="clearStreamNotes()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RESOURCES ── -->
+    <div id="sec-resources" class="section">
+      <div class="page-title">Resources</div>
+      <div class="page-sub">Every official link. If a link is not on this page, it is not official. Links from old chat messages are the number one cause of a lead landing on a dead page.</div>
+
+      <div class="res-group">
+        <div class="res-group-title">Daily Reports — no form, no record</div>
+        <div class="res-grid">
+          <a class="res-card" href="https://docs.google.com/forms/d/e/1FAIpQLSc9hAzDH-u-6qSKWlITRnHR3BORjYHnhGT6kbdROmBU0qJvTA/viewform" target="_blank"><div class="res-icon">📝</div><div><div class="res-name">End of Call Report (EOC)</div><div class="res-desc">Closers. Within 10 minutes of every call ending, one per call. Cash questions appear only if the call closed.</div></div></a>
+          <a class="res-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfkvFKq-dWhfJJA_m-uPqv85ZqnJWKHWoo2eHqMjpcMl7ezkQ/viewform" target="_blank"><div class="res-icon">🌙</div><div><div class="res-name">EOD Report — Closer</div><div class="res-desc">Closers, end of each day. 5 questions. Calls and cash already come from your EOC reports.</div></div></a>
+          <a class="res-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdwKUElOiwbZ23acWzxqcXxf4GBkeJckwmrwDZZIrebBmQAHQ/viewform" target="_blank"><div class="res-icon">☀️</div><div><div class="res-name">BOD Report — Setter</div><div class="res-desc">Setters, start of every shift. 3 questions, under a minute.</div></div></a>
+          <a class="res-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfHK1VGbqqrha47dysQrTepL5e6k9dGPU7h6XH0NAQIxmdr6g/viewform" target="_blank"><div class="res-icon">🌙</div><div><div class="res-name">EOD Report — Setter</div><div class="res-desc">Setters, end of every shift. Dials and texts pull from GHL automatically, you do not report them.</div></div></a>
+        </div>
+      </div>
+
+      <div class="res-group">
+        <div class="res-group-title">Working a Lead</div>
+        <div class="res-grid">
+          <a class="res-card" href="https://shecreatesugc.typeform.com/apply" target="_blank"><div class="res-icon">🧾</div><div><div class="res-name">Application Form</div><div class="res-desc">Where every strategy call application comes from. A new submission is your speed-to-lead trigger: under 15 minutes.</div></div></a>
+          <a class="res-card" href="https://api.leadconnectorhq.com/widget/booking/IsXoVP98XCkkSwXNtRL9" target="_blank"><div class="res-icon">📅</div><div><div class="res-name">Book a Strategy Session</div><div class="res-desc">The only calendar for $3K strategy calls. Use this exact link, older versions 404.</div></div></a>
+          <a class="res-card" href="https://gigichahal.com" target="_blank"><div class="res-icon">🎟️</div><div><div class="res-name">Masterclass Registration Page</div><div class="res-desc">Send this to a cold lead. The destination for DMs and organic traffic.</div></div></a>
+          <a class="res-card" href="https://live.shecreatesugc.com/replay" target="_blank"><div class="res-icon">▶️</div><div><div class="res-name">Webinar Replay Page</div><div class="res-desc">Send to anyone who missed Thursday.</div></div></a>
+          <a class="res-card" href="https://drive.google.com/file/d/12Oh-uqDEI_XOSM62NqQTRP6QZypJYgHl/view" target="_blank"><div class="res-icon">🗺️</div><div><div class="res-name">Free UGC Starter Roadmap (PDF)</div><div class="res-desc">The free value resource. Use it on a financial disqualify so she still leaves with something.</div></div></a>
+          <a class="res-card" href="https://discord.gg/XbDwHwZUBJ" target="_blank"><div class="res-icon">💬</div><div><div class="res-name">Free Community Discord</div><div class="res-desc">The warm exit for a disqualified lead. This is the free community, not the student server.</div></div></a>
+        </div>
+      </div>
+
+      <div class="res-group">
+        <div class="res-group-title">On a Call</div>
+        <div class="res-grid">
+          <a class="res-card" href="https://docs.google.com/spreadsheets/d/1es0J7WvC-03HL5i2PF3nLKQg32Hoi7Zqb0Z_AImsmRY/edit" target="_blank"><div class="res-icon">💳</div><div><div class="res-name">Checkout Links Sheet</div><div class="res-desc">The single source of truth for payment. BNPL first, manual plans second. Never copy an individual checkout link into chat or bookmark one.</div></div></a>
+          <a class="res-card" href="https://www.loom.com/share/7a722254b2f54c3f8fcd287960d2faef" target="_blank"><div class="res-icon">🎬</div><div><div class="res-name">Checkout Sheet Walkthrough (Loom)</div><div class="res-desc">How to read the sheet and pick the right option.</div></div></a>
+          <a class="res-card" href="https://drive.google.com/drive/folders/14tbD0rX-p72bRoOBg3bz3Zcb2XtNvLLZ" target="_blank"><div class="res-icon">🏆</div><div><div class="res-name">Testimonial Screenshots</div><div class="res-desc">19 student wins. Have it open before the call starts, not after she raises the doubt.</div></div></a>
+          <a class="res-card" href="https://whop.com/joined/shecreates-academy/products/she-creates-academy-2b/" target="_blank"><div class="res-icon">🎓</div><div><div class="res-name">Full Academy — product page ($3,000)</div><div class="res-desc">What the student actually sees. Know it before you pitch it.</div></div></a>
+          <a class="res-card" href="https://www.koraugc.com/signup" target="_blank"><div class="res-icon">🌸</div><div><div class="res-name">Kora Sign Up</div><div class="res-desc">This is the downsell. If she cannot invest in the Academy, route her to Kora. Not a discount, not a cheaper Academy. Free for Academy students.</div></div></a>
+          <a class="res-card" href="https://discord.gg/CCdfBvs7uT" target="_blank"><div class="res-icon">🎓</div><div><div class="res-name">SCA Student Discord Invite</div><div class="res-desc">Permanent invite. Checkout Options 1 and 3 redirect here automatically. Option 2 (BNPL split) does not: send it by hand once all three $1,000 payments clear.</div></div></a>
+        </div>
+      </div>
+
+      <div class="res-group">
+        <div class="res-group-title">Your Numbers</div>
+        <div class="res-grid">
+          <a class="res-card" href="https://plfranc0.github.io/sca-dashboard/" target="_blank"><div class="res-icon">📊</div><div><div class="res-name">SCA Dashboard</div><div class="res-desc">Team performance by stream week: funnel, closers, setters, cancels, cash.</div></div></a>
+          <a class="res-card" href="https://plfranc0.github.io/sca-commission-hq/" target="_blank"><div class="res-icon">💵</div><div><div class="res-name">Commission HQ</div><div class="res-desc">What you are owed and what has been paid. Closers 10% of cash collected. Setters $50 flat when a call you set closes.</div></div></a>
+          <a class="res-card" href="https://discord.com/channels/1522608399198720281/1547746089522700318" target="_blank"><div class="res-icon">📌</div><div><div class="res-name">Discord #resources Forum</div><div class="res-desc">Setter Hub, Closer Hub, GoHighLevel, SOP Library, Training, Official Links. Read-only reference inside the team Discord.</div></div></a>
+        </div>
+      </div>
+
+      <div class="res-group">
+        <div class="res-group-title">Logins and Tools</div>
+        <div class="res-grid">
+          <a class="res-card" href="https://app.gohighlevel.com/" target="_blank"><div class="res-icon">📞</div><div><div class="res-name">GoHighLevel</div><div class="res-desc">Dialer, texts, calendar, contact records, pipelines. Access from the sales manager.</div></div></a>
+          <a class="res-card" href="https://whop.com/shecreates-academy/" target="_blank"><div class="res-icon">🛍️</div><div><div class="res-name">Whop</div><div class="res-desc">Payments, the student community and the full curriculum. Know all 7 modules. Access from Maya.</div></div></a>
+          <a class="res-card" href="https://us06web.zoom.us/j/81647335178" target="_blank"><div class="res-icon">🎥</div><div><div class="res-name">Zoom — Thursday Masterclass</div><div class="res-desc">Thursday 4 PM PT, one permanent link. Watch it at least once: it is exactly what your prospect just saw.</div></div></a>
+          <a class="res-card" href="https://fathom.video/" target="_blank"><div class="res-icon">🎙️</div><div><div class="res-name">Fathom</div><div class="res-desc">Records your calls. Paste the Fathom link into every EOC report.</div></div></a>
+        </div>
+      </div>
+
+      <div class="res-group">
+        <div class="res-group-title">Do Not Use — these still load, and every one is wrong</div>
+        <div class="res-grid">
+          <div class="res-card dnu"><div class="res-icon">⛔</div><div><div class="res-name">Book a Discovery Call ($497)</div><div class="res-desc">The $497 track was retired August 31. Under-$500 leads go to Kora, not to a cheaper call.</div></div></div>
+          <div class="res-card dnu"><div class="res-icon">⛔</div><div><div class="res-name">Curriculum Only / SheCreates Light ($1,500)</div><div class="res-desc">Retired as the downsell September 11. The Whop page still loads, which is exactly why it is dangerous.</div></div></div>
+          <div class="res-card dnu"><div class="res-icon">⛔</div><div><div class="res-name">form.fillout.com application</div><div class="res-desc">The old application form. It still opens but feeds nothing. Anyone who fills it is lost.</div></div></div>
+          <div class="res-card dnu"><div class="res-icon">⛔</div><div><div class="res-name">watch. / masterclass. subdomains</div><div class="res-desc">Old replay page and a dead subdomain. Use the replay link above.</div></div></div>
+          <div class="res-card dnu"><div class="res-icon">⛔</div><div><div class="res-name">Any report form not listed above</div><div class="res-desc">All four forms were rebuilt August 26. Older BOD, EOD and EOC forms have different URLs and nobody reads them.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TEAM ── -->
+    <div id="sec-team" class="section">
+      <div class="page-title">The Team</div>
+      <div class="page-sub">Three people on the sales floor. Primary channel is <strong>Discord</strong>. Here is who does what and when to loop them in.</div>
+      <div class="section-label">Sales Team</div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">JJ</div>
+          <div class="team-info">
+            <div class="team-name">JJ Hernandez</div>
+            <div class="team-role">Sales Manager</div>
+            <div class="team-focus">Runs the sales floor day to day: coaching, call reviews, Thursday coverage, hiring setters, the chase on cancels and unbooked applicants. Loop in for anything about how the team sells, who owns a lead, or a deal that needs a decision mid-call.</div>
+            <div><span class="team-tag">Coaching</span><span class="team-tag">Thursday coverage</span><span class="team-tag">Hiring</span><span class="team-tag">Deal decisions</span></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">U</div>
+          <div class="team-info">
+            <div class="team-name">Ulani</div>
+            <div class="team-role">Closer</div>
+            <div class="team-focus">Strategy calls and closing. First in line on the booking calendar, so she takes most Thursday-night self-bookings. Loop in on call performance, objection patterns and specific prospect situations.</div>
+            <div><span class="team-tag">Strategy calls</span><span class="team-tag">Closing</span></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">K</div>
+          <div class="team-info">
+            <div class="team-name">Kirsty</div>
+            <div class="team-role">Closer</div>
+            <div class="team-focus">Strategy calls and closing. Second in line on the booking calendar. Loop in on call performance, objection patterns and specific prospect situations.</div>
+            <div><span class="team-tag">Strategy calls</span><span class="team-tag">Closing</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:2rem;">Loop In (not on the sales floor)</div>
+      <div class="team-sub">You will need these three. They are not sales team, so they are not in the daily rhythm.</div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">M</div>
+          <div class="team-info">
+            <div class="team-name">Maya</div>
+            <div class="team-role">Operations · She Creates</div>
+            <div class="team-focus">Whop (payments, memberships, access), the student community, hiring approvals, Discord. Loop in for anything about a payment, a refund, a student's access, or comp.</div>
+            <div><span class="team-tag">Whop</span><span class="team-tag">Payments</span><span class="team-tag">Hiring</span></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">G</div>
+          <div class="team-info">
+            <div class="team-name">Gigi Chahal</div>
+            <div class="team-role">Founder</div>
+            <div class="team-focus">Runs the Thursday stream and owns the offer and the content. Loop in only for the offer itself, program structure, or a major student concern. Everything else goes through Maya.</div>
+            <div><span class="team-tag">Thursday stream</span><span class="team-tag">Offer</span></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">P</div>
+          <div class="team-info">
+            <div class="team-name">Patrick Franco</div>
+            <div class="team-role">Systems · Focal Point</div>
+            <div class="team-focus">GoHighLevel, automations, the forms, the dashboard, Commission HQ, this page. Loop in when a link is dead, a ping stopped firing, a number on the dashboard looks wrong, or you need something built.</div>
+            <div><span class="team-tag">GHL</span><span class="team-tag">Automations</span><span class="team-tag">Dashboards</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DOC REVIEW ── -->
+    <div id="sec-review" class="section">
+      <div class="page-title">Doc Review</div>
+      <div class="page-sub">Track docs waiting on a review: scripts, copy, SOP revisions, anything one of you sent another to look over. Paste a link to where the file lives. This just tracks status and notes.</div>
+      <div class="highlight amber" style="margin-bottom:1.25rem;">
+        <h3>Shared with the team</h3>
+        <p>This queue is live for everyone on the approved list, on any device. Sign in with Google to add or change anything.</p>
+      </div>
+      <div class="review-add">
+        <div class="review-add-row">
+          <input type="text" id="review-title-input" class="review-input" placeholder="Doc title (e.g. 'Closer script v2')">
+          <input type="text" id="review-link-input" class="review-input" placeholder="Link (Google Doc, Drive, Loom...)">
+          <select id="review-status-input" class="review-select">
+            <option value="pending">Pending Review</option>
+            <option value="approved">Approved</option>
+            <option value="changes">Needs Changes</option>
+          </select>
+        </div>
+        <div class="review-add-row">
+          <textarea id="review-notes-input" class="review-textarea" placeholder="Notes: what needs a look, who sent it, feedback..."></textarea>
+        </div>
+        <div class="review-add-row" style="justify-content:flex-end;">
+          <button class="review-add-btn" onclick="addReviewDoc()">Add to Review Queue</button>
+        </div>
+      </div>
+      <div class="section-label">Review Queue</div>
+      <div class="review-list" id="review-list"><div class="task-empty">Sign in to see the queue.</div></div>
+    </div>
+
+    <!-- ── PLAYBOOKS ── -->
+    <div id="sec-playbooks" class="section">
+      <div class="page-title">Playbooks &amp; SOPs</div>
+      <div class="page-sub">Operational playbooks for every key workflow. The 8 numbered SOPs are evergreen: roles only, no rep names, so any new hire trains off the same docs.</div>
+
+      <div class="section-label" style="margin-top:0;">The SOP Library</div>
+      <div class="pb-list" style="margin-bottom:2rem;">
+        <a class="pb-item" href="https://docs.google.com/document/d/1rFCGY7OTbP8UrczYSawtYDitxXauLkRBGXmZAKS1J1w/edit" target="_blank"><div class="pb-icon">📞</div><div class="pb-title">01 Setter Phone Script</div><span class="pb-tag">Setters</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1S6oXzvDKgDoyzI3WcpzoTYG9DvPJPEo5oKYLh6RxqKE/edit" target="_blank"><div class="pb-icon">💬</div><div class="pb-title">02 DM Setting Playbook</div><span class="pb-tag">Setters</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1vW4bEKngLLmAbYwJFZy-Egz6X59pAvcLXvmDhdm66Xw/edit" target="_blank"><div class="pb-icon">🏗️</div><div class="pb-title">03 Closer Call Framework</div><span class="pb-tag">Closers</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1Awv7pvJDxmOuFqqJkrn6vW0Lx8kFsVUn-DVY0xGStMk/edit" target="_blank"><div class="pb-icon">💳</div><div class="pb-title">04 Financing Walkthrough</div><span class="pb-tag">Closers</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1BzsUNdIzbXhHJgVGCsZRShX3aliT6gNtcpq3tOFko7c/edit" target="_blank"><div class="pb-icon">⬆️</div><div class="pb-title">05 Starter to Academy Upsell</div><span class="pb-tag">Closers</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1TITLax8VBBDcGmRhRuLr61EAG1Cd4krrLN5qU8oDKuw/edit" target="_blank"><div class="pb-icon">🗒️</div><div class="pb-title">06 Daily Reporting</div><span class="pb-tag">Everyone</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1Dk_4PAbV6QCNON1ojLKeT42g4s74t6JFCIvbaD-IufI/edit" target="_blank"><div class="pb-icon">👔</div><div class="pb-title">07 Sales Manager Guide</div><span class="pb-tag">Manager</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1nNac-yvfAowkj7J7ZhwpJRZbz0O5j39Okx24xYb747k/edit" target="_blank"><div class="pb-icon">🎯</div><div class="pb-title">08 Interviewing and Ramping</div><span class="pb-tag">Hiring</span><span class="pb-arr">↗</span></a>
+      </div>
+
+      <div class="section-label">Scripts and Handbooks</div>
+      <div class="pb-list" style="margin-bottom:2rem;">
+        <a class="pb-item" href="https://docs.google.com/document/d/1Ntw_M8bVuKc1Cc2m_1OihVdwt7XOgCKEE8fXkwZ9EMc/edit" target="_blank"><div class="pb-icon">📖</div><div class="pb-title">SCA Closer Handbook</div><span class="pb-tag">Closers</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1lkrKzNMm435FTYr3CpMv83UdT4zp2V9kJOw4VcoZj44/edit" target="_blank"><div class="pb-icon">📖</div><div class="pb-title">SCA Setter Handbook</div><span class="pb-tag">Setters</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://discord.com/channels/1522608399198720281/1547755979083620393" target="_blank"><div class="pb-icon">🧭</div><div class="pb-title">Which Script When — Lead Triage (4 setter scripts)</div><span class="pb-tag">Setters</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/15eygPkLs2N2F7AFBAT50p5O0cfPyqTChWgPXS6jYXtI/edit" target="_blank"><div class="pb-icon">🎓</div><div class="pb-title">Closer Training and Program Guide</div><span class="pb-tag">New closers</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1B7XdJstKu3oJJOE7Uz6l0jOEV0UFRxyGiGC1Dly3ppg/edit" target="_blank"><div class="pb-icon">🏋️</div><div class="pb-title">Setter Drill Pack + Certification</div><span class="pb-tag">New setters</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="./training-bible.html" target="_blank"><div class="pb-icon">📚</div><div class="pb-title">Training Bible (JJ, in progress)</div><span class="pb-tag">Everyone</span><span class="pb-arr">↗</span></a>
+      </div>
+
+      <div class="section-label">Management</div>
+      <div class="pb-list" style="margin-bottom:2rem;">
+        <a class="pb-item" href="https://docs.google.com/spreadsheets/d/1qx4_QXX7BAKHCFlCKTAbok9NRrOs9CvG7dJ3WDe9JFo/edit" target="_blank"><div class="pb-icon">✅</div><div class="pb-title">Manager Daily Checklist (sheet)</div><span class="pb-tag">Manager</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://plfranc0.github.io/sca-commission-hq/" target="_blank"><div class="pb-icon">💵</div><div class="pb-title">Commission HQ: pay rules and ledger</div><span class="pb-tag">Compensation</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://plfranc0.github.io/sca-dashboard/" target="_blank"><div class="pb-icon">📊</div><div class="pb-title">SCA Dashboard</div><span class="pb-tag">Numbers</span><span class="pb-arr">↗</span></a>
+      </div>
+
+      <div class="section-label">Hiring and Agreements</div>
+      <div class="pb-list">
+        <a class="pb-item" href="https://airtable.com/appjxWqbVWCTx8PVp/pag6KGbfAINBqCySq/form" target="_blank"><div class="pb-icon">🪪</div><div class="pb-title">Closer Onboarding Form (includes the agreement)</div><span class="pb-tag">Day one</span><span class="pb-arr">↗</span></a>
+        <a class="pb-item" href="https://docs.google.com/document/d/1fWmO1xBmhPzF95efvd_cHvE83IENqDPZUEtGu8lkYhE/edit" target="_blank"><div class="pb-icon">✍️</div><div class="pb-title">Closer Agreement</div><span class="pb-tag">Contract</span><span class="pb-arr">↗</span></a>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+/* ── Theme ── */
+function toggleTheme(){
+  var h=document.documentElement,n=h.dataset.theme==='day'?'night':'day';
+  h.dataset.theme=n;
+  var l=document.getElementById('mode-lbl');if(l)l.textContent=n==='day'?'Day':'Night';
+  try{localStorage.setItem('sca-hq-theme',n);}catch(e){}
+}
+(function(){try{var s=localStorage.getItem('sca-hq-theme')||document.documentElement.dataset.theme||'day';var l=document.getElementById('mode-lbl');if(l)l.textContent=s==='day'?'Day':'Night';}catch(e){}})();
+
+/* ── Clock (Pacific, the team's clock) ── */
+function updateClock(){
+  var d=new Date();
+  var s=d.toLocaleString('en-US',{timeZone:'America/Los_Angeles',weekday:'long',hour:'numeric',minute:'2-digit'});
+  var el=document.getElementById('clock');if(el)el.textContent=s.replace(' at ',' — ').replace(',',' —')+' PT';
+}
+updateClock();setInterval(updateClock,30000);
+
+/* ── The week. ONE place to edit. Weekday index 0=Sun..6=Sat. ──
+   Thursday is fixed (Gigi's stream). The other days are defaults for JJ to confirm or change. */
+var RHYTHM={
+  0:null,
+  1:{initials:'M',host:'Sales team',title:'Pipeline reset',tag:'Chase + follow-up',desc:'Call every cancel and every unbooked qualified applicant from the weekend. Nobody chased these in September.'},
+  2:{initials:'T',host:'JJ',title:'Call reviews',tag:'Coaching',desc:'Fathom recordings from the week. Date and track every call reviewed, post takeaways in Discord.'},
+  3:{initials:'W',host:'JJ',title:'Team training',tag:'Group coaching',desc:'Teach one thing everyone needed this week, then drill it live. Day and time are JJ\'s call.'},
+  4:{initials:'G',host:'Gigi',title:'Live stream · 4:00 PM PT',tag:'Stream day — all hands',desc:'The pipeline arrives tonight. Run of show is in the Stream Day tab.'},
+  5:{initials:'F',host:'JJ + Patrick',title:'Weekly numbers',tag:'Scoreboard',desc:'Webinar report, payout week closes Thursday night, EOC forms reconciled.'},
+  6:{initials:'S',host:'Closers',title:'Weekend calls',tag:'Strategy calls',desc:'Thursday-night bookings land Fri to Sun. Confirmation texts go out automatically; a real YES is the only confirmation.'}
+};
+var WEEK_NAMES=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+(function initDash(){
+  var now=new Date();
+  var dayName=now.toLocaleString('en-US',{timeZone:'America/Los_Angeles',weekday:'long'});
+  var day=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].indexOf(dayName);
+  var dateEl=document.getElementById('dash-date');
+  if(dateEl)dateEl.textContent=now.toLocaleString('en-US',{timeZone:'America/Los_Angeles',weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  var hr=Number(now.toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hour12:false}));
+  var gt=document.getElementById('greeting-time');if(gt)gt.textContent=hr<12?'morning':hr<17?'afternoon':'evening';
+
+  var callWrap=document.getElementById('today-call-wrap');
+  if(callWrap){
+    var c=RHYTHM[day];
+    if(c){
+      callWrap.innerHTML='<div class="today-call"><div class="today-call-pre">Today</div><div class="today-call-inner"><div class="today-initials">'+c.initials+'</div><div class="today-info"><div class="today-tag">'+c.tag+'</div><div class="today-title">'+c.title+'</div><div class="today-host">'+c.host+' · '+c.desc+'</div></div></div><div class="today-call-bg">'+c.initials+'</div></div>';
+    } else {
+      callWrap.innerHTML='<div class="rest-day">🌿 <strong>Sunday.</strong> Weekend bookings only. Monday is the pipeline reset.</div>';
+    }
+  }
+  var wg=document.getElementById('week-grid');
+  if(wg){
+    var html='';
+    for(var i=1;i<=6;i++){
+      var wc=RHYTHM[i];
+      html+='<div class="week-day'+(i===day?' today':'')+'"><div class="wd-name">'+WEEK_NAMES[i]+'</div><div class="wd-title">'+wc.title+'</div><div class="wd-host">'+wc.host+'</div></div>';
+    }
+    wg.innerHTML=html;
+  }
+})();
+
+/* ── Live funnel tiles: last row of the Master Tracker's Weekly Scorecard (same feed as the SCA Dashboard) ── */
+var SCORECARD_SHEET='1AaqCLsqpdhzktzE002UvN1aBGsMXajksak_w8qL_tos';
+(async function loadScorecard(){
+  var meta=document.getElementById('stats-meta');
+  function fail(msg){
+    if(meta)meta.innerHTML='<span style="color:#E2504C;">Scorecard did not load: '+escapeHtml(msg)+'</span> · <a href="https://plfranc0.github.io/sca-dashboard/" target="_blank">open the dashboard</a>';
+  }
+  try{
+    var url='https://docs.google.com/spreadsheets/d/'+SCORECARD_SHEET+'/gviz/tq?tqx=out:json&headers=1&sheet='+encodeURIComponent('Weekly Scorecard')+'&t='+Date.now();
+    var res=await fetch(url);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    var text=await res.text();
+    var o=text.indexOf('setResponse('),c=text.lastIndexOf(')');
+    if(o===-1||c===-1)throw new Error('unexpected response');
+    var d=JSON.parse(text.slice(o+12,c));
+    if(d.status!=='ok')throw new Error(JSON.stringify(d.errors||d.status));
+    var cols=d.table.cols.map(function(x){return (x.label||x.id||'').trim();});
+    var rows=d.table.rows.map(function(r){var obj={};cols.forEach(function(n,i){var cell=r.c[i];obj[n]=cell?cell.v:null;});return obj;});
+    rows=rows.filter(function(r){return r['Week (Thu)'];});
+    if(!rows.length)throw new Error('no populated weeks');
+    var last=rows[rows.length-1];
+    function num(v){return (typeof v==='number'&&v>=0)?v:null;}
+    function put(id,v,money){var el=document.getElementById(id);if(!el)return;if(v===null){el.textContent='—';el.title='Not available yet for this week';return;}el.textContent=money?('$'+Math.round(v).toLocaleString('en-US')):Math.round(v).toLocaleString('en-US');}
+    put('st-reg',num(last['Registered']));
+    put('st-att',num(last['Attended Live']));
+    put('st-apps',num(last['Applications']));
+    put('st-booked',num(last['Calls Booked (stream day)']));
+    put('st-closes',num(last['Closes']));
+    put('st-cash',num(last['Cash Collected']),true);
+    var sub=document.getElementById('st-att-sub');
+    if(sub&&last['Attendance Source'])sub.textContent=String(last['Verified']||'').toUpperCase()==='PROXY'?'GHL click proxy, not Zoom':String(last['Attendance Source']);
+    var wk=last['Week (Thu)'];
+    var wkTxt=wk;
+    var m=/Date\((\d+),(\d+),(\d+)\)/.exec(String(wk));
+    if(m){wkTxt=new Date(+m[1],+m[2],+m[3]).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+    else if(/^\d{4}-\d{2}-\d{2}$/.test(String(wk))){var p=String(wk).split('-');wkTxt=new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+    if(meta)meta.innerHTML='Stream week of <strong>Thu '+escapeHtml(wkTxt)+'</strong>. Cash and closes keep landing through Wednesday. Source: Master Tracker → Weekly Scorecard, read live. <a href="https://plfranc0.github.io/sca-dashboard/" target="_blank">Full dashboard ↗</a>';
+  }catch(e){fail(e.message||String(e));}
+})();
+
+/* ── Section nav ── */
+var SEC_TITLES={dash:'Dashboard',notes:'Brain Dump',pipeline:'Pipeline',streamday:'Stream Day',resources:'Resources',team:'Team',review:'Doc Review',playbooks:'Playbooks'};
+var hubLoaded=false;
+function openSidebar(){var sb=document.getElementById('sidebar'),bd=document.getElementById('sidebar-backdrop');if(sb)sb.classList.add('open');if(bd)bd.classList.add('show');}
+function closeSidebar(){var sb=document.getElementById('sidebar'),bd=document.getElementById('sidebar-backdrop');if(sb)sb.classList.remove('open');if(bd)bd.classList.remove('show');}
+function goTo(id){
+  closeSidebar();
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  var sec=document.getElementById('sec-'+id);var nav=document.querySelector('[data-sec="'+id+'"]');
+  if(sec)sec.classList.add('active');if(nav)nav.classList.add('active');
+  var mh=document.getElementById('mh-title');if(mh)mh.textContent=SEC_TITLES[id]||id;
+  if(id==='pipeline'&&!hubLoaded){
+    var iframe=document.getElementById('hub-iframe');
+    if(iframe){iframe.src='https://plfranc0.github.io/sca-dashboard/';iframe.onload=function(){iframe.classList.add('loaded');};hubLoaded=true;}
+  }
+  history.replaceState(null,'','#'+id);
+}
+(function(){var h=location.hash.replace('#','');if(h&&document.getElementById('sec-'+h))goTo(h);})();
+
+function escapeHtml(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+
+/* Static-mode stubs. Replaced by the Firebase module below when a config exists. */
+function needsFirebase(){alert('Sign-in is not set up on this page yet. Patrick needs to add the Firebase config.');}
+window.hqSignIn=needsFirebase;
+window.addTask=function(){needsFirebase();};
+window.clearNotes=function(){needsFirebase();};
+window.saveCalOverride=function(){needsFirebase();};
+window.clearCalOverride=function(){needsFirebase();};
+window.streamAddTask=function(){needsFirebase();};
+window.clearStreamNotes=function(){needsFirebase();};
+window.addReviewDoc=function(){needsFirebase();};
+(function(){
+  if(!window.FIREBASE_CONFIG){
+    var b=document.getElementById('fb-banner');
+    if(b)b.innerHTML='<div class="banner warn"><strong>Shared features are off.</strong> Links, playbooks, the team page and the funnel tiles all work. Sign-in, your calendar, tasks, notes, Doc Review and Stream Day notes turn on once Patrick adds the Firebase config (see README).</div>';
+    var ab=document.getElementById('auth-btn');if(ab){ab.textContent='Sign-in not set up';ab.disabled=true;ab.style.opacity='.55';}
+  }
+})();
+</script>
+
+<script type="module">
+if(window.FIREBASE_CONFIG){
+import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js").then(async function(appMod){
+  const [{getFirestore, collection, addDoc, doc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, getDoc},
+         {getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js")
+  ]);
+  const app=appMod.initializeApp(window.FIREBASE_CONFIG);
+  const db=getFirestore(app);
+  const auth=getAuth(app);
+  const provider=new GoogleAuthProvider();
+  let user=null;
+  let unsubs=[];
+  function stopAll(){unsubs.forEach(function(u){try{u();}catch(e){}});unsubs=[];}
+  function denied(e,what){
+    console.error(what,e);
+    alert('Could not '+what+'. You are signed in as '+(user?user.email:'nobody')+'. If that address is not on the approved list in firestore.rules, ask Patrick to add it.');
+  }
+  function ts(){var d=new Date(),h=d.getHours(),m=d.getMinutes(),ampm=h>=12?'PM':'AM';h=h%12||12;return h+':'+(m<10?'0'+m:m)+' '+ampm;}
+
+  /* ── auth ── */
+  window.hqSignIn=async function(){try{await signInWithPopup(auth,provider);}catch(e){alert('Sign-in failed or was cancelled.');}};
+  function paintAuth(){
+    var btn=document.getElementById('auth-btn'),em=document.getElementById('auth-email'),gn=document.getElementById('greeting-name');
+    if(user){btn.textContent='Sign out';btn.onclick=function(){signOut(auth);};em.textContent=user.email;if(gn)gn.textContent=(user.displayName||user.email).split(' ')[0];}
+    else{btn.textContent='Sign in with Google';btn.onclick=window.hqSignIn;em.textContent='';if(gn)gn.textContent='team';}
+  }
+  onAuthStateChanged(auth,function(u){
+    user=u;paintAuth();stopAll();
+    if(user){startPersonal();startShared();}
+    else{renderTasks([]);setCalendar(null);paintNotes(null);renderStream([]);paintStreamNotes(null);renderReview(null);}
+  });
+
+  /* ── per-user calendar ── */
+  function setCalendar(embedUrl){
+    [{ph:'calendar-placeholder',frame:'calendar-iframe',extra:''},
+     {ph:'calendar-mini-placeholder',frame:'calendar-mini-iframe',extra:'&mode=AGENDA&showTitle=0&showTabs=0&showCalendars=0&showPrint=0'}].forEach(function(t){
+      var ph=document.getElementById(t.ph),fr=document.getElementById(t.frame);if(!ph||!fr)return;
+      if(embedUrl){fr.src=embedUrl+t.extra;fr.style.display='block';ph.style.display='none';}
+      else{fr.src='';fr.style.display='none';ph.style.display='';}
+    });
+  }
+  function defaultEmbed(){return 'https://calendar.google.com/calendar/embed?src='+encodeURIComponent(user.email)+'&ctz=America%2FLos_Angeles';}
+  async function loadCalendar(){
+    var inp=document.getElementById('cal-override-input');
+    try{
+      var snap=await getDoc(doc(db,'users',user.uid,'settings','calendar'));
+      var ov=snap.exists()&&snap.data().embedUrl?snap.data().embedUrl:'';
+      if(inp)inp.value=ov;
+      setCalendar(ov||defaultEmbed());
+    }catch(e){console.error(e);setCalendar(defaultEmbed());}
+  }
+  window.saveCalOverride=async function(){
+    if(!user)return window.hqSignIn();
+    var v=(document.getElementById('cal-override-input').value||'').trim();
+    if(v&&!/^https:\/\/calendar\.google\.com\/calendar\/embed\?/.test(v)){alert('That is not a Google Calendar embed URL. It should start with https://calendar.google.com/calendar/embed?');return;}
+    try{await setDoc(doc(db,'users',user.uid,'settings','calendar'),{embedUrl:v,updatedAt:Date.now()});setCalendar(v||defaultEmbed());}catch(e){denied(e,'save the calendar setting');}
+  };
+  window.clearCalOverride=async function(){if(!user)return;document.getElementById('cal-override-input').value='';try{await setDoc(doc(db,'users',user.uid,'settings','calendar'),{embedUrl:'',updatedAt:Date.now()});}catch(e){}setCalendar(defaultEmbed());};
+
+  /* ── per-user tasks ── */
+  var taskCache=[];
+  function taskHTML(t,fnPrefix){
+    return '<div class="task-item"><div class="task-check'+(t.done?' done':'')+'" onclick="'+fnPrefix+'Toggle(\''+t.id+'\','+(!t.done)+')"></div><div class="task-text'+(t.done?' done':'')+'" onclick="'+fnPrefix+'Toggle(\''+t.id+'\','+(!t.done)+')">'+escapeHtml(t.text)+'</div><button class="task-del" onclick="'+fnPrefix+'Delete(\''+t.id+'\')">✕</button></div>';
+  }
+  function renderTasks(tasks){
+    taskCache=tasks;
+    var full=document.getElementById('task-list-full'),mini=document.getElementById('task-list-mini');
+    var empty=user?'No tasks yet. Add one above.':'Sign in to see your tasks.';
+    if(full)full.innerHTML=tasks.length?tasks.map(function(t){return taskHTML(t,'task');}).join(''):'<div class="task-empty">'+empty+'</div>';
+    if(mini){var open=tasks.filter(function(t){return !t.done;});mini.innerHTML=!user?'<div class="task-empty">Sign in to see your tasks.</div>':tasks.length===0?'<div class="task-empty">No tasks yet.</div>':open.length===0?'<div class="task-empty">All caught up. Nice.</div>':open.slice(0,6).map(function(t){return taskHTML(t,'task');}).join('');}
+  }
+  window.addTask=async function(inputId){
+    if(!user)return window.hqSignIn();
+    var input=document.getElementById(inputId);var val=(input.value||'').trim();if(!val)return;
+    try{await addDoc(collection(db,'users',user.uid,'tasks'),{text:val,done:false,added:Date.now()});input.value='';}catch(e){denied(e,'add the task');}
+  };
+  window.taskToggle=async function(id,done){try{await updateDoc(doc(db,'users',user.uid,'tasks',id),{done:done});}catch(e){denied(e,'update the task');}};
+  window.taskDelete=async function(id){try{await deleteDoc(doc(db,'users',user.uid,'tasks',id));}catch(e){denied(e,'remove the task');}};
+
+  /* ── per-user notes ── */
+  var notesTimer=null,notesEditing=false;
+  function paintNotes(data){
+    var area=document.getElementById('notes-area'),st=document.getElementById('notes-status');
+    if(notesEditing)return;
+    if(!user){area.value='';st.textContent='Sign in to save notes';return;}
+    area.value=data&&data.text?data.text:'';
+    st.textContent=data&&data.updatedAt?'Saved '+new Date(data.updatedAt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'Nothing saved yet';
+  }
+  (function(){
+    var area=document.getElementById('notes-area'),st=document.getElementById('notes-status');
+    area.addEventListener('focus',function(){notesEditing=true;});area.addEventListener('blur',function(){notesEditing=false;});
+    area.addEventListener('input',function(){
+      if(!user){st.textContent='Sign in to save notes';return;}
+      st.textContent='Saving…';st.classList.remove('saved');clearTimeout(notesTimer);
+      notesTimer=setTimeout(async function(){try{await setDoc(doc(db,'users',user.uid,'notes','braindump'),{text:area.value,updatedAt:Date.now()});st.textContent='Saved '+ts();st.classList.add('saved');}catch(e){st.textContent='Could not save. Are you on the approved list?';}},600);
+    });
+  })();
+  window.clearNotes=async function(){if(!user)return window.hqSignIn();if(!confirm('Clear your notes? This cannot be undone.'))return;try{await setDoc(doc(db,'users',user.uid,'notes','braindump'),{text:'',updatedAt:Date.now()});document.getElementById('notes-area').value='';}catch(e){denied(e,'clear notes');}};
+
+  function startPersonal(){
+    loadCalendar();
+    unsubs.push(onSnapshot(query(collection(db,'users',user.uid,'tasks'),orderBy('added','desc')),function(snap){var a=[];snap.forEach(function(d){a.push(Object.assign({id:d.id},d.data()));});renderTasks(a);},function(e){denied(e,'load your tasks');}));
+    unsubs.push(onSnapshot(doc(db,'users',user.uid,'notes','braindump'),function(snap){paintNotes(snap.exists()?snap.data():null);},function(e){document.getElementById('notes-status').textContent='Could not load notes. Are you on the approved list?';}));
+  }
+
+  /* ── shared: Stream Day tasks + notes ── */
+  function renderStream(tasks){
+    var list=document.getElementById('stream-task-list');if(!list)return;
+    if(!user){list.innerHTML='<div class="task-empty">Sign in to see shared tasks.</div>';return;}
+    list.innerHTML=tasks.length?tasks.map(function(t){return taskHTML(t,'stream');}).join(''):'<div class="task-empty">No team tasks yet. Add one above.</div>';
+  }
+  window.streamAddTask=async function(){
+    if(!user)return window.hqSignIn();
+    var input=document.getElementById('stream-task-input');var val=(input.value||'').trim();if(!val)return;
+    try{await addDoc(collection(db,'streamTasks'),{text:val,done:false,added:Date.now(),addedBy:user.email});input.value='';}catch(e){denied(e,'add the team task');}
+  };
+  window.streamToggle=async function(id,done){try{await updateDoc(doc(db,'streamTasks',id),{done:done});}catch(e){denied(e,'update the team task');}};
+  window.streamDelete=async function(id){try{await deleteDoc(doc(db,'streamTasks',id));}catch(e){denied(e,'remove the team task');}};
+  var sTimer=null,sEditing=false;
+  function paintStreamNotes(data){
+    var area=document.getElementById('stream-notes-area'),st=document.getElementById('stream-notes-status');
+    if(sEditing)return;
+    if(!user){area.value='';st.textContent='Sign in to edit';return;}
+    area.value=data&&data.text?data.text:'';
+    st.textContent=data&&data.updatedBy?'Last saved by '+data.updatedBy:'Nothing saved yet';
+  }
+  (function(){
+    var area=document.getElementById('stream-notes-area'),st=document.getElementById('stream-notes-status');
+    area.addEventListener('focus',function(){sEditing=true;});area.addEventListener('blur',function(){sEditing=false;});
+    area.addEventListener('input',function(){
+      if(!user){st.textContent='Sign in to edit';return;}
+      st.textContent='Saving…';st.classList.remove('saved');clearTimeout(sTimer);
+      sTimer=setTimeout(async function(){try{await setDoc(doc(db,'streamNotes','shared'),{text:area.value,updatedBy:user.email,updatedAt:Date.now()});st.textContent='Saved '+ts()+' by '+user.email;st.classList.add('saved');}catch(e){st.textContent='Could not save. Are you on the approved list?';}},600);
+    });
+  })();
+  window.clearStreamNotes=async function(){if(!user)return window.hqSignIn();if(!confirm('Clear the shared notes for everyone? This cannot be undone.'))return;try{await setDoc(doc(db,'streamNotes','shared'),{text:'',updatedBy:user.email,updatedAt:Date.now()});}catch(e){denied(e,'clear the shared notes');}};
+
+  /* ── shared: Doc Review ── */
+  var LABEL={pending:'Pending Review',approved:'Approved',changes:'Needs Changes'};
+  function reviewHTML(d){
+    var title=d.link?'<a class="review-item-title" href="'+escapeHtml(d.link)+'" target="_blank" rel="noopener">'+escapeHtml(d.title)+'</a>':'<span class="review-item-title no-link">'+escapeHtml(d.title)+'</span>';
+    var date=d.added?new Date(d.added).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+    return '<div class="review-item"><div class="review-item-head">'+title+'<select class="review-select" onchange="setReviewStatus(\''+d.id+'\',this.value)" style="padding:.3rem .5rem;">'+
+      ['pending','approved','changes'].map(function(s){return '<option value="'+s+'"'+(d.status===s?' selected':'')+'>'+LABEL[s]+'</option>';}).join('')+'</select></div>'+
+      (d.notes?'<div class="review-item-notes">'+escapeHtml(d.notes)+'</div>':'')+
+      '<div class="review-item-foot"><span class="review-badge '+escapeHtml(d.status)+'">'+(LABEL[d.status]||escapeHtml(d.status))+'</span><span class="review-item-meta">Added '+date+(d.addedBy?' · '+escapeHtml(d.addedBy):'')+'</span><button class="review-item-del" onclick="deleteReviewDoc(\''+d.id+'\')">Remove</button></div></div>';
+  }
+  function renderReview(items){
+    var list=document.getElementById('review-list');if(!list)return;
+    if(!user||items===null){list.innerHTML='<div class="task-empty">Sign in to see the queue.</div>';return;}
+    list.innerHTML=items.length?items.map(reviewHTML).join(''):'<div class="task-empty">Nothing in the queue yet. Add a doc above.</div>';
+  }
+  window.addReviewDoc=async function(){
+    if(!user)return window.hqSignIn();
+    var t=document.getElementById('review-title-input'),l=document.getElementById('review-link-input'),s=document.getElementById('review-status-input'),n=document.getElementById('review-notes-input');
+    var title=(t.value||'').trim();if(!title)return;
+    try{await addDoc(collection(db,'reviewQueue'),{title:title,link:(l.value||'').trim(),status:s.value,notes:(n.value||'').trim(),added:Date.now(),addedBy:user.email});t.value='';l.value='';n.value='';s.value='pending';}catch(e){denied(e,'add to the queue');}
+  };
+  window.setReviewStatus=async function(id,status){try{await updateDoc(doc(db,'reviewQueue',id),{status:status});}catch(e){denied(e,'change the status');}};
+  window.deleteReviewDoc=async function(id){try{await deleteDoc(doc(db,'reviewQueue',id));}catch(e){denied(e,'remove the item');}};
+
+  function startShared(){
+    unsubs.push(onSnapshot(query(collection(db,'streamTasks'),orderBy('added','desc')),function(snap){var a=[];snap.forEach(function(d){a.push(Object.assign({id:d.id},d.data()));});renderStream(a);},function(e){document.getElementById('stream-task-list').innerHTML='<div class="task-empty">Could not load shared tasks. Are you on the approved list?</div>';}));
+    unsubs.push(onSnapshot(doc(db,'streamNotes','shared'),function(snap){paintStreamNotes(snap.exists()?snap.data():null);},function(e){document.getElementById('stream-notes-status').textContent='Could not load shared notes. Are you on the approved list?';}));
+    unsubs.push(onSnapshot(query(collection(db,'reviewQueue'),orderBy('added','desc')),function(snap){var a=[];snap.forEach(function(d){a.push(Object.assign({id:d.id},d.data()));});renderReview(a);},function(e){document.getElementById('review-list').innerHTML='<div class="task-empty">Could not load the queue. Are you on the approved list?</div>';}));
+  }
+}).catch(function(e){
+  console.error(e);
+  var b=document.getElementById('fb-banner');if(b)b.innerHTML='<div class="banner warn"><strong>Firebase failed to load.</strong> '+escapeHtml(e.message||String(e))+'</div>';
+});
+}
+</script>
+</body>
+</html>
