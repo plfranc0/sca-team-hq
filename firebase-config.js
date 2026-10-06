@@ -1,10 +1,5 @@
-/* SCA Team HQ, Firebase project config. Pasted 10/6/2026. Not a secret: access is set by firestore.rules. */
-window.FIREBASE_CONFIG = { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
+/* SCA Team HQ, Firebase project config. Pasted 2026-10-06. Not a secret: access is set by firestore.rules. */
+window.FIREBASE_CONFIG = {
   apiKey: "AIzaSyDF2emuSg4lW--oaGe3FCXqf8IwtuCjcoM",
   authDomain: "sca-team-hq.firebaseapp.com",
   databaseURL: "https://sca-team-hq-default-rtdb.firebaseio.com",
